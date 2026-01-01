@@ -1,6 +1,6 @@
 # Steam Pattern & Float Checker
 
-![Extension Demo](images/demo.png)
+![Extension Demo](images/demo_new.png)
 
 ## Инструкция на русском
 
