@@ -63,7 +63,7 @@
         }
 
         .template-badge {
-            background: rgba(0,0,0,0.6);
+            background: rgba(50, 50, 50, 0.5);
             padding: 2px 6px;
             border-radius: 3px;
             color: #fff;
@@ -299,33 +299,34 @@
                         // Если есть float, добавим и мини-бар справа
                         if (floatValue != null) {
                             const fv = parseFloat(floatValue);
-                            let wearColor = '#FFD54F';
-                            if (!isNaN(fv)) {
-                                if (fv < 0.07) { wearColor = '#4CAF50'; }
-                                else if (fv < 0.15) { wearColor = '#8BC34A'; }
-                                else if (fv < 0.38) { wearColor = '#FFEB3B'; }
-                                else if (fv < 0.45) { wearColor = '#FF9800'; }
-                                else { wearColor = '#F44336'; }
-                            }
-
+                            
+                            // Создаем многоцветную полоску с разделением по условиям
                             const bar = document.createElement('span');
                             bar.style.display = 'inline-block';
-                            bar.style.width = '80px';
-                            bar.style.height = '8px';
-                            bar.style.background = '#222';
-                            bar.style.borderRadius = '4px';
-                            bar.style.overflow = 'hidden';
+                            bar.style.width = '90px';
+                            bar.style.height = '5px';
+                            bar.style.background = 'linear-gradient(to right, #4CAF50 0%, #4CAF50 11.67%, #8BC34A 11.67%, #8BC34A 25%, #FFEB3B 25%, #FFEB3B 62.5%, #FF9800 62.5%, #FF9800 75%, #F44336 75%, #F44336 100%)';
+                            bar.style.borderRadius = '2px';
+                            bar.style.overflow = 'visible';
                             bar.style.marginLeft = '6px';
-
-                            const inner = document.createElement('i');
-                            const percent = (!isNaN(fv) ? Math.min(1, fv / 0.6) * 100 : 0);
-                            inner.style.display = 'block';
-                            inner.style.width = `${percent}%`;
-                            inner.style.height = '100%';
-                            inner.style.background = wearColor;
-                            inner.style.transition = 'width 200ms ease';
-
-                            bar.appendChild(inner);
+                            bar.style.position = 'relative';
+                            bar.style.border = '1px solid #444';
+                            
+                            // Создаем маркер, который показывает текущее значение float
+                            const marker = document.createElement('i');
+                            const markerPercent = (!isNaN(fv) ? Math.min(1, fv / 1.0) * 100 : 0);
+                            marker.style.position = 'absolute';
+                            marker.style.left = `calc(${markerPercent}% - 2px)`;
+                            marker.style.top = '-2px';
+                            marker.style.width = '4px';
+                            marker.style.height = '9px';
+                            marker.style.background = '#fff';
+                            marker.style.border = '1px solid #333';
+                            marker.style.borderRadius = '1px';
+                            marker.style.boxShadow = '0 0 2px rgba(0,0,0,0.6)';
+                            marker.style.pointerEvents = 'none';
+                            
+                            bar.appendChild(marker);
                             infoLine.appendChild(bar);
 
                             const wearLabel = getExteriorLabel(listingInfo, assetId);
@@ -362,10 +363,51 @@
                             overlay.innerHTML = infoHtmlParts.join(' ');
 
                             if (floatValue != null) {
+                                const fv = parseFloat(floatValue);
                                 const floatLine = document.createElement('div');
                                 floatLine.style.fontSize = '10px';
-                                floatLine.style.marginTop = '2px';
-                                floatLine.innerHTML = `float: <span style="color:#FFD070;font-weight:bold">${floatValue}</span>`;
+                                floatLine.style.marginTop = '4px';
+                                floatLine.style.display = 'flex';
+                                floatLine.style.gap = '4px';
+                                floatLine.style.alignItems = 'center';
+                                
+                                const floatLabel = document.createElement('span');
+                                floatLabel.textContent = 'float:';
+                                floatLabel.style.color = '#aaa';
+                                floatLine.appendChild(floatLabel);
+                                
+                                const floatValue = document.createElement('span');
+                                floatValue.textContent = floatValue;
+                                floatValue.style.color = '#FFD070';
+                                floatValue.style.fontWeight = 'bold';
+                                floatLine.appendChild(floatValue);
+                                
+                                // Добавляем многоцветную полоску и маркер
+                                const bar = document.createElement('span');
+                                bar.style.display = 'inline-block';
+                                bar.style.width = '50px';
+                                bar.style.height = '4px';
+                                bar.style.background = 'linear-gradient(to right, #4CAF50 0%, #4CAF50 11.67%, #8BC34A 11.67%, #8BC34A 25%, #FFEB3B 25%, #FFEB3B 62.5%, #FF9800 62.5%, #FF9800 75%, #F44336 75%, #F44336 100%)';
+                                bar.style.borderRadius = '2px';
+                                bar.style.overflow = 'visible';
+                                bar.style.position = 'relative';
+                                bar.style.border = '1px solid #444';
+                                
+                                const marker = document.createElement('i');
+                                const markerPercent = (!isNaN(fv) ? Math.min(1, fv / 1.0) * 100 : 0);
+                                marker.style.position = 'absolute';
+                                marker.style.left = `calc(${markerPercent}% - 1.5px)`;
+                                marker.style.top = '-2px';
+                                marker.style.width = '3px';
+                                marker.style.height = '8px';
+                                marker.style.background = '#fff';
+                                marker.style.border = '1px solid #333';
+                                marker.style.borderRadius = '1px';
+                                marker.style.boxShadow = '0 0 2px rgba(0,0,0,0.5)';
+                                
+                                bar.appendChild(marker);
+                                floatLine.appendChild(bar);
+                                
                                 overlay.appendChild(floatLine);
                             }
 
