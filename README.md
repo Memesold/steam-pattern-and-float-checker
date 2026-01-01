@@ -1,5 +1,7 @@
 # Steam Pattern & Float Checker
 
+![Extension Demo](images/demo.png)
+
 ## Инструкция на русском
 
 **Что делает расширение:**
