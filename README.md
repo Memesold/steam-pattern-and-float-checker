@@ -65,4 +65,6 @@ No more need to open third-party checker websites — all the information appear
 ## Support the project
 If you like what I do, you can support me here: [Donate](https://dalink.to/memesold)  
 Thanks a lot! 🙏
+I would have uploaded the extension to the Chrome Web Store for free, but I can't top up my account with a foreign card.  
+ 
 
