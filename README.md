@@ -61,3 +61,8 @@ No more need to open third-party checker websites — all the information appear
 2. 启用"开发者模式"(右上角的按钮)
 3. 点击"加载未打包的扩展程序"并选择 `pattern finder` 文件夹
 4. 完成! 扩展程序将在 Steam Market 上开始工作
+
+## Support the project
+If you like what I do, you can support me here: [Donate](https://dalink.to/memesold)  
+Thanks a lot! 🙏
+
